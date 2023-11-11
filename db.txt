@@ -1,0 +1,3 @@
+code rust	true
+Study ANT	true
+Take Shower	false
