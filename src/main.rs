@@ -99,5 +99,9 @@ fn main(){
                 Err(why) => println!("An error occurred: {}",why),
             }
         }
+    } else if action == "list" {
+        for(key,value) in &todo.map{
+            println!("{}: {}",key ,value);
+        }
     }
 }
