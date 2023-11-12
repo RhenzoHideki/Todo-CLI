@@ -1,3 +1,16 @@
+// Personal Project doing a Todo List
+// What do I need for it ?
+// - Done:  Opening File 
+// - Done: Reading File 
+// - Done: Writing File
+// - Done: Saving  File
+// - DOne: Closing File
+// - Done: Create a Struct (content , status)
+// - Done: Save Struct
+// - Done: Read Struct
+// - TODO: Remove from File 
+// - Done task
+
 use std::{collections::HashMap, io::Read};
 use std::str::FromStr;
 
@@ -48,7 +61,7 @@ impl Todo {
         }
         std::fs::write("db.txt", content)
     }
-
+    
     fn complete(&mut self, key: &String)-> Option<()>{
         match self.map.get_mut(key){
             Some(v) => Some(*v = false),
@@ -72,6 +85,14 @@ fn main(){
         }
     }else if action == "complete"{
         match todo.complete(&item){
+            None => println!("'{}' is not present in the list", item),
+            Some(_) => match todo.save(){
+                Ok(_) => println!("Todo saved"),
+                Err(why) => println!("An error occurred: {}",why),
+            }
+        }
+    } else if action == "remove" {
+        match todo.map.remove(&item){
             None => println!("'{}' is not present in the list", item),
             Some(_) => match todo.save(){
                 Ok(_) => println!("Todo saved"),
